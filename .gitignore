@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+.streamlit/
+*.log
+*.db
+rag_store/
+rag_store_corrupt_*/
+.codex
