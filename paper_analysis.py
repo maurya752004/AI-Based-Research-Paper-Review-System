@@ -28,6 +28,11 @@ class RankedPaperAnalysis(PaperAnalysis):
     rank: int
 
 
+class PaperInput(TypedDict):
+    title: str
+    text: str
+
+
 def _split_sentences(text: str) -> List[str]:
     return [s.strip() for s in re.split(r"(?<=[.!?])\s+", text.strip()) if s.strip()]
 
@@ -124,11 +129,7 @@ def analyze_paper(title: str, text: str) -> PaperAnalysis:
     }
 
 
-def compare_papers(papers: List[Dict[str, str]]) -> List[RankedPaperAnalysis]:
+def compare_papers(papers: List[PaperInput]) -> List[RankedPaperAnalysis]:
     analyses = [analyze_paper(paper["title"], paper["text"]) for paper in papers]
-    ranked = sorted(analyses, key=lambda item: item["scores"]["overall"], reverse=True)
-
-    for index, paper in enumerate(ranked, start=1):
-        paper["rank"] = index
-
-    return ranked
+    sorted_analyses = sorted(analyses, key=lambda item: item["scores"]["overall"], reverse=True)
+    return [{**paper, "rank": index} for index, paper in enumerate(sorted_analyses, start=1)]
