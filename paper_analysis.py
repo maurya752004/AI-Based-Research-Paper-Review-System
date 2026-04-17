@@ -5,6 +5,7 @@ from __future__ import annotations
 import re
 from typing import Dict, List, TypedDict
 
+# Increment/decrement applied per matched signal in each scoring category.
 SCORE_WEIGHT = 1.2
 
 
@@ -132,4 +133,4 @@ def analyze_paper(title: str, text: str) -> PaperAnalysis:
 def compare_papers(papers: List[PaperInput]) -> List[RankedPaperAnalysis]:
     analyses = [analyze_paper(paper["title"], paper["text"]) for paper in papers]
     sorted_analyses = sorted(analyses, key=lambda item: item["scores"]["overall"], reverse=True)
-    return [{**paper, "rank": index} for index, paper in enumerate(sorted_analyses, start=1)]
+    return [{**paper, "rank": rank} for rank, paper in enumerate(sorted_analyses, start=1)]
