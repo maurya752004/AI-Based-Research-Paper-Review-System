@@ -38,6 +38,7 @@ class PaperAnalysisTests(unittest.TestCase):
         self.assertEqual(ranked[0]["rank"], 1)
         self.assertEqual(ranked[1]["title"], "Low Score")
         self.assertEqual(ranked[1]["rank"], 2)
+        self.assertIn("Addresses a relevant research problem.", ranked[1]["strengths"])
         self.assertNotIn("Presents ideas clearly.", ranked[1]["strengths"])
         self.assertIn("Contains unclear or ambiguous explanations.", ranked[1]["weaknesses"])
         self.assertLess(ranked[1]["scores"]["overall"], ranked[0]["scores"]["overall"])

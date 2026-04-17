@@ -81,8 +81,8 @@ def identify_strengths_weaknesses(text: str) -> Dict[str, List[str]]:
 
 def _score_category(text: str, positive_words: List[str], negative_words: List[str]) -> float:
     score = 5.0
-    score += sum(1 for word in positive_words if _contains_phrase(text, word)) * SCORE_WEIGHT
-    score -= sum(1 for word in negative_words if _contains_phrase(text, word)) * SCORE_WEIGHT
+    score += sum(SCORE_WEIGHT for word in positive_words if _contains_phrase(text, word))
+    score -= sum(SCORE_WEIGHT for word in negative_words if _contains_phrase(text, word))
     return max(1.0, min(10.0, round(score, 2)))
 
 
