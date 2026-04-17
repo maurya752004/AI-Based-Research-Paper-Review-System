@@ -39,6 +39,7 @@ class PaperAnalysisTests(unittest.TestCase):
         self.assertEqual(ranked[1]["title"], "Low Score")
         self.assertEqual(ranked[1]["rank"], 2)
         self.assertNotIn("Presents ideas clearly.", ranked[1]["strengths"])
+        self.assertIn("Contains unclear or ambiguous explanations.", ranked[1]["weaknesses"])
 
 
 if __name__ == "__main__":
